@@ -27,6 +27,22 @@ describe('createTunnel', () => {
     assertTunnelPlaceholderContent(wrapper, props.message)
   })
 
+  it('can not accidently override id', () => {
+    const { TunnelPlaceholder, Tunnel } = createTunnel()
+
+    const wrapper = mount(
+      <TunnelProvider>
+        <div>
+          <TunnelPlaceholder id="foo" />
+          <Tunnel id="bar">
+            <Msg message={props.message} />
+          </Tunnel>
+        </div>
+      </TunnelProvider>,
+    )
+    assertTunnelPlaceholderContent(wrapper, props.message)
+  })
+
   function assertTunnelPlaceholderContent(wrapper, expectedContent) {
     expect(wrapper.find(Msg).text()).toEqual(expectedContent)
   }

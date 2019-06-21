@@ -6,10 +6,8 @@ import TunnelPlaceholderBase from './TunnelPlaceholder'
 let i = 0
 const uniqueId = prefix => prefix + '-' + i++
 
-const withProps = props => Component => {
-  const WrappedComponent = otherProps => (
-    <Component {...props} {...otherProps} />
-  )
+const withProps = fixedProps => Component => {
+  const WrappedComponent = props => <Component {...props} {...fixedProps} />
 
   return WrappedComponent
 }
